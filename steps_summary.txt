@@ -1,0 +1,23 @@
+Jotting down the steps I took and my thinking process for each phase of the project. 
+This will help with my analysis and methodology section in my dissertation. 
+
+Data collection
+Started by locking down a single, reliable data source before experimenting with models.
+Used hourly Bitcoin OHLCV data to capture short-term volatility without excessive noise.
+Fetched the data once and stored it locally to keep the dataset fixed and reproducible.
+
+Feature engineering
+Focused on a small, defensible set of indicators rather than adding every technical signal available.
+Engineered log returns and rolling volatility to represent how price variability evolves over time.
+Added volume-based features to capture liquidity shocks often associated with volatility spikes.
+Included RSI and MACD as contextual momentum indicators, not trading rules.
+
+Spike definition
+Framed the task as volatility spike prediction, not price forecasting.
+Defined a spike as an unusually large short-term price movement relative to historical behaviour.
+Labeled spikes using a top-quantile threshold within a short future horizon to keep the definition data-driven.
+ 
+Label construction
+Used a look-ahead window only to label historical data, never as model input.
+Computed thresholds on the training period only to avoid temporal leakage.
+Recorded spike direction separately to allow optional directional analysis later.
